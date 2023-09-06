@@ -76,7 +76,8 @@ class _StatsModelsAdapter(BaseForecaster):
                 )
                 if index_diff.isin(y.index).all():
                     y = y.loc[index_diff]
-                    X = X.loc[index_diff]
+                    if X is not None:
+                        X = X.loc[index_diff]
                 self._fitted_forecaster = self._fitted_forecaster.append(y, X)
 
     def _predict(self, fh, X):
